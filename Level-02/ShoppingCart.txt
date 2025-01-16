@@ -1,0 +1,98 @@
+// CartItem.java
+class CartItem {
+    // Attributes of the CartItem class
+    String itemName;
+    double price;
+    int quantity;
+
+    // Constructor to initialize the CartItem object
+    CartItem(String itemName, double price, int quantity) {
+        this.itemName = itemName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    // Method to calculate the total cost for this item
+    double calculateTotalCost() {
+        return price * quantity;
+    }
+
+    // Method to display the item details
+    void displayItemDetails() {
+        System.out.println("Item: " + itemName);
+        System.out.println("Price: $" + price);
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Total Cost: $" + calculateTotalCost());
+    }
+}
+
+// Cart.java
+class Cart {
+    // A list to hold cart items (array of CartItem objects)
+    CartItem[] cartItems = new CartItem[10]; // Limit to 10 items for simplicity
+    int itemCount = 0;  // Keep track of the number of items in the cart
+
+    // Method to add an item to the cart
+    void addItemToCart(CartItem item) {
+        if (itemCount < cartItems.length) {
+            cartItems[itemCount] = item;
+            itemCount++;
+            System.out.println(item.itemName + " added to cart.");
+        } else {
+            System.out.println("Cart is full. Cannot add more items.");
+        }
+    }
+
+    // Method to remove an item from the cart by name
+    void removeItemFromCart(String itemName) {
+        for (int i = 0; i < itemCount; i++) {
+            if (cartItems[i].itemName.equals(itemName)) {
+                // Shift remaining items to the left to fill the gap
+                for (int j = i; j < itemCount - 1; j++) {
+                    cartItems[j] = cartItems[j + 1];
+                }
+                cartItems[itemCount - 1] = null; // Clear the last item
+                itemCount--;
+                System.out.println(itemName + " removed from cart.");
+                return;
+            }
+        }
+        System.out.println(itemName + " not found in the cart.");
+    }
+
+    // Method to display the total cost of all items in the cart
+    void displayTotalCost() {
+        double totalCost = 0;
+        for (int i = 0; i < itemCount; i++) {
+            totalCost += cartItems[i].calculateTotalCost();
+        }
+        System.out.println("Total Cost of Cart: $" + totalCost);
+    }
+}
+
+// Main class to test the CartItem and Cart classes
+public class Main {
+    public static void main(String[] args) {
+        // Create CartItem objects
+        CartItem item1 = new CartItem("Laptop", 800.00, 1);
+        CartItem item2 = new CartItem("Phone", 300.00, 2);
+        CartItem item3 = new CartItem("Headphones", 50.00, 3);
+
+        // Create Cart object
+        Cart cart = new Cart();
+
+        // Add items to the cart
+        cart.addItemToCart(item1);
+        cart.addItemToCart(item2);
+        cart.addItemToCart(item3);
+
+        // Display details of items and total cost
+        cart.displayTotalCost();
+
+        // Remove an item from the cart
+        cart.removeItemFromCart("Phone");
+
+        // Display updated details
+        cart.displayTotalCost();
+    }
+}
