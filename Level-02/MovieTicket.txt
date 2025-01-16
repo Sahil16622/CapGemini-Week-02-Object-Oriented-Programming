@@ -1,0 +1,42 @@
+// MovieTicket.java
+class MovieTicket {
+    // Attributes of the MovieTicket class
+    String movieName;
+    int seatNumber;
+    double price;
+
+    // Constructor to initialize the MovieTicket object
+    MovieTicket(String movieName) {
+        this.movieName = movieName;
+        this.seatNumber = 0;  // Seat number will be assigned when booking the ticket
+        this.price = 0.0;     // Price will be updated when booking
+    }
+
+    // Method to book a ticket (assign seat and price)
+    void bookTicket(int seatNumber, double price) {
+        this.seatNumber = seatNumber;
+        this.price = price;
+        System.out.println("Ticket booked successfully!");
+    }
+
+    // Method to display the ticket details
+    void displayTicketDetails() {
+        System.out.println("Movie: " + movieName);
+        System.out.println("Seat Number: " + seatNumber);
+        System.out.println("Price: $" + price);
+    }
+}
+
+// Main class to test the MovieTicket class
+public class Main {
+    public static void main(String[] args) {
+        // Create a MovieTicket object for a movie
+        MovieTicket ticket = new MovieTicket("Avengers: Endgame");
+
+        // Book a ticket with seat number 12 and price $15.00
+        ticket.bookTicket(12, 15.00);
+
+        // Display the ticket details
+        ticket.displayTicketDetails();
+    }
+}
