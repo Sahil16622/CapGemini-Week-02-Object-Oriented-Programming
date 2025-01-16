@@ -1,0 +1,43 @@
+// Item.java
+class Item {
+    // Attributes of the Item class
+    int itemCode;
+    String itemName;
+    double price;
+
+    // Constructor to initialize the Item object
+    Item(int itemCode, String itemName, double price) {
+        this.itemCode = itemCode;
+        this.itemName = itemName;
+        this.price = price;
+    }
+
+    // Method to display the details of the item
+    void displayDetails() {
+        System.out.println("Item Details:");
+        System.out.println("Item Code: " + itemCode);
+        System.out.println("Item Name: " + itemName);
+        System.out.println("Price: $" + price);
+    }
+
+    // Method to calculate the total cost for a given quantity
+    double calculateTotalCost(int quantity) {
+        return price * quantity;
+    }
+}
+
+// Main class to test the Item class
+public class Main {
+    public static void main(String[] args) {
+        // Create an Item object
+        Item item1 = new Item(101, "Laptop", 750.00);
+
+        // Display item details
+        item1.displayDetails();
+
+        // Calculate and display the total cost for a quantity of 3
+        int quantity = 3;
+        double totalCost = item1.calculateTotalCost(quantity);
+        System.out.println("Total Cost for " + quantity + " units: $" + totalCost);
+    }
+}
