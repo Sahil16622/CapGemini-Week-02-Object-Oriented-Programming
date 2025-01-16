@@ -1,0 +1,47 @@
+// Student.java
+class Student {
+    // Attributes of the Student class
+    String name;
+    int rollNumber;
+    double marks;
+
+    // Constructor to initialize the Student object
+    Student(String name, int rollNumber, double marks) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+        this.marks = marks;
+    }
+
+    // Method to calculate the grade based on marks
+    String calculateGrade() {
+        if (marks >= 90) {
+            return "A";
+        } else if (marks >= 75) {
+            return "B";
+        } else if (marks >= 50) {
+            return "C";
+        } else {
+            return "F"; // Fail
+        }
+    }
+
+    // Method to display the student's details and grade
+    void displayDetails() {
+        System.out.println("Student Details:");
+        System.out.println("Name: " + name);
+        System.out.println("Roll Number: " + rollNumber);
+        System.out.println("Marks: " + marks);
+        System.out.println("Grade: " + calculateGrade());
+    }
+}
+
+// Main class to test the Student class
+public class Main {
+    public static void main(String[] args) {
+        // Create a Student object
+        Student student1 = new Student("Alice", 101, 87.5);
+
+        // Display the student's details and grade
+        student1.displayDetails();
+    }
+}
