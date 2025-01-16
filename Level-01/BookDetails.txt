@@ -1,0 +1,33 @@
+// Book.java
+class Book {
+    // Attributes of the Book class
+    String title;
+    String author;
+    double price;
+
+    // Constructor to initialize the Book object
+    Book(String title, String author, double price) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
+    // Method to display the details of the book
+    void displayDetails() {
+        System.out.println("Book Details:");
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Price: $" + price);
+    }
+}
+
+// Main class to test the Book class
+public class Main {
+    public static void main(String[] args) {
+        // Create a Book object
+        Book book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 10.99);
+
+        // Call the method to display book details
+        book1.displayDetails();
+    }
+}
