@@ -1,0 +1,39 @@
+// Circle.java
+class Circle {
+    // Attribute to store the radius of the circle
+    double radius;
+
+    // Constructor to initialize the radius
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    // Method to calculate the area of the circle
+    double calculateArea() {
+        return Math.PI * radius * radius; // Area = πr²
+    }
+
+    // Method to calculate the circumference of the circle
+    double calculateCircumference() {
+        return 2 * Math.PI * radius; // Circumference = 2πr
+    }
+
+    // Method to display the details of the circle
+    void displayDetails() {
+        System.out.println("Circle Details:");
+        System.out.println("Radius: " + radius);
+        System.out.println("Area: " + calculateArea());
+        System.out.println("Circumference: " + calculateCircumference());
+    }
+}
+
+// Main class to test the Circle class
+public class Main {
+    public static void main(String[] args) {
+        // Create a Circle object with a radius of 5.0
+        Circle circle1 = new Circle(5.0);
+
+        // Call the method to display circle details
+        circle1.displayDetails();
+    }
+}
