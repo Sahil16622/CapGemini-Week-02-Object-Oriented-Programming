@@ -1,0 +1,51 @@
+class Course {
+    // Instance Variables
+    private String courseName;
+    private int duration; // in weeks
+    private double fee;
+
+    // Class Variable
+    private static String instituteName = "Default Institute";
+
+    // Constructor
+    public Course(String courseName, int duration, double fee) {
+        this.courseName = courseName;
+        this.duration = duration;
+        this.fee = fee;
+    }
+
+    // Instance Method to display course details
+    public void displayCourseDetails() {
+        System.out.println("Institute Name: " + instituteName);
+        System.out.println("Course Name: " + courseName);
+        System.out.println("Duration: " + duration + " weeks");
+        System.out.println("Fee: $" + fee);
+        System.out.println();
+    }
+
+    // Class Method to update institute name
+    public static void updateInstituteName(String newInstituteName) {
+        instituteName = newInstituteName;
+    }
+}
+
+public class OnlineCourseManagement {
+    public static void main(String[] args) {
+        // Creating Course objects
+        Course course1 = new Course("Java Programming", 12, 500);
+        Course course2 = new Course("Data Science", 16, 1000);
+
+        // Displaying initial details
+        System.out.println("Before Updating Institute Name:");
+        course1.displayCourseDetails();
+        course2.displayCourseDetails();
+
+        // Updating the institute name
+        Course.updateInstituteName("Tech Learning Academy");
+
+        // Displaying updated details
+        System.out.println("After Updating Institute Name:");
+        course1.displayCourseDetails();
+        course2.displayCourseDetails();
+    }
+}
