@@ -1,0 +1,81 @@
+// Base class: Student
+class Student {
+    // Public member
+    public int rollNumber;
+
+    // Protected member
+    protected String name;
+
+    // Private member
+    private double CGPA;
+
+    // Constructor
+    public Student(int rollNumber, String name, double CGPA) {
+        this.rollNumber = rollNumber;
+        this.name = name;
+        this.CGPA = CGPA;
+    }
+
+    // Public getter for CGPA
+    public double getCGPA() {
+        return CGPA;
+    }
+
+    // Public setter for CGPA
+    public void setCGPA(double CGPA) {
+        if (CGPA >= 0.0 && CGPA <= 10.0) {
+            this.CGPA = CGPA;
+        } else {
+            System.out.println("Invalid CGPA value! It must be between 0.0 and 10.0.");
+        }
+    }
+
+    // Public method to display student details
+    public void displayStudentDetails() {
+        System.out.println("Roll Number: " + rollNumber);
+        System.out.println("Name: " + name);
+        System.out.println("CGPA: " + CGPA);
+    }
+}
+
+// Subclass: PostgraduateStudent
+class PostgraduateStudent extends Student {
+    private String researchTopic;
+
+    // Constructor
+    public PostgraduateStudent(int rollNumber, String name, double CGPA, String researchTopic) {
+        super(rollNumber, name, CGPA);
+        this.researchTopic = researchTopic;
+    }
+
+    // Method to display details of postgraduate student
+    public void displayPostgraduateDetails() {
+        // Accessing protected member 'name' from superclass
+        System.out.println("Postgraduate Student Details:");
+        System.out.println("Roll Number: " + rollNumber);
+        System.out.println("Name: " + name); // Accessing the protected member
+        System.out.println("Research Topic: " + researchTopic);
+        System.out.println("CGPA: " + getCGPA());
+        System.out.println();
+    }
+}
+
+// Main class to demonstrate the functionality
+public class UniversityManagementSystem {
+    public static void main(String[] args) {
+        // Create a Student object
+        Student student = new Student(101, "Alice", 8.5);
+        System.out.println("Student Details:");
+        student.displayStudentDetails();
+
+        // Modify CGPA using setter
+        student.setCGPA(9.2);
+        System.out.println("\nUpdated Student Details:");
+        student.displayStudentDetails();
+
+        // Create a PostgraduateStudent object
+        PostgraduateStudent pgStudent = new PostgraduateStudent(201, "Bob", 9.0, "Machine Learning");
+        System.out.println("\nPostgraduate Student Details:");
+        pgStudent.displayPostgraduateDetails();
+    }
+}
