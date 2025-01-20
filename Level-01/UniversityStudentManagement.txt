@@ -1,0 +1,76 @@
+class Student {
+    // Static variable for university name
+    private static String universityName = "Global University";
+
+    // Static variable to track the total number of students
+    private static int totalStudents = 0;
+
+    // Final variable for roll number
+    private final int rollNumber;
+
+    // Instance variables for name and grade
+    private String name;
+    private char grade;
+
+    // Constructor to initialize name, rollNumber, and grade
+    public Student(String name, int rollNumber, char grade) {
+        this.name = name;
+        this.rollNumber = rollNumber; // Final variable assigned here
+        this.grade = grade;
+        totalStudents++; // Increment total students
+    }
+
+    // Static method to display the total number of students
+    public static void displayTotalStudents() {
+        System.out.println("Total students enrolled: " + totalStudents);
+    }
+
+    // Method to display student details
+    public void displayDetails() {
+        System.out.println("University: " + universityName);
+        System.out.println("Name: " + name);
+        System.out.println("Roll Number: " + rollNumber);
+        System.out.println("Grade: " + grade);
+    }
+
+    // Method to update the grade of the student
+    public void updateGrade(char newGrade) {
+        this.grade = newGrade;
+    }
+
+    // Method to check if an object is an instance of the Student class
+    public static void checkInstance(Object obj) {
+        if (obj instanceof Student) {
+            System.out.println("The object is an instance of the Student class.");
+        } else {
+            System.out.println("The object is NOT an instance of the Student class.");
+        }
+    }
+}
+
+public class UniversityStudentManagement {
+    public static void main(String[] args) {
+        // Create Student objects
+        Student student1 = new Student("Alice", 101, 'A');
+        Student student2 = new Student("Bob", 102, 'B');
+
+        // Display student details
+        student1.displayDetails();
+        System.out.println();
+        student2.displayDetails();
+
+        // Check if an object is an instance of the Student class
+        System.out.println();
+        Student.checkInstance(student1);
+        Student.checkInstance("Not a Student");
+
+        // Update the grade of a student
+        System.out.println("\nUpdating grade...");
+        student1.updateGrade('A+');
+        student1.displayDetails();
+
+        // Display total number of students
+        System.out.println();
+        Student.displayTotalStudents();
+    }
+}
