@@ -1,0 +1,102 @@
+// Base class: Employee
+class Employee {
+
+    //Static members
+    static String companyName = "TechCorp";
+    private static int totalEmployees = 0;
+
+
+    // Public member
+    public final String employeeID;
+
+    // Protected member
+    protected String department;
+
+    // Private member
+    private double salary;
+
+    // Constructor
+    public Employee(String employeeID, String department, double salary) {
+        this.employeeID = employeeID;
+        this.department = department;
+        this.salary = salary;
+        totalEmployees++;
+    }
+
+
+     public static void displayTotalEmployees() {
+        System.out.println("Total Employees: " + totalEmployees);
+    }
+
+
+
+
+    // Public method to modify salary
+    public void modifySalary(double newSalary) {
+        if (newSalary > 0) {
+            salary = newSalary;
+            System.out.println("Salary updated to: $" + newSalary);
+        } else {
+            System.out.println("Invalid salary amount!");
+        }
+    }
+
+    // Public method to display employee details
+    public void displayEmployeeDetails() {
+       
+    if (this instanceof Employee) { // Using instanceof to validate object type
+            System.out.println("Employee ID: " + employeeID);
+            System.out.println("Department: " + department);
+            System.out.println("Salary: $" + salary);
+            System.out.println();
+        } else {
+            System.out.println("Invalid employee object!");
+        }
+
+    }
+}
+
+// Subclass: Manager
+class Manager extends Employee {
+    private String team;
+
+    // Constructor
+    public Manager(String employeeID, String department, double salary, String team) {
+        super(employeeID, department, salary);
+        this.team = team;
+    }
+
+    // Method to display Manager details
+    public void displayManagerDetails() {
+        System.out.println("Manager Details:");
+        System.out.println("Employee ID: " + employeeID); // Public member
+        System.out.println("Department: " + department); // Protected member
+        System.out.println("Team: " + team);
+        System.out.println("Salary: $" + salary); // Private member accessed via public method
+        System.out.println();
+    }
+}
+
+// Main class to demonstrate the functionality
+public class EmployeeRecords {
+    public static void main(String[] args) {
+        // Create an Employee object
+        Employee employee = new Employee("E123", "IT", 50000.00);
+        System.out.println("Employee Details:");
+        employee.displayEmployeeDetails();
+
+        // Modify salary
+        employee.modifySalary(55000.00);
+        System.out.println("Updated Employee Details:");
+        employee.displayEmployeeDetails();
+
+        // Create a Manager object
+        Manager manager = new Manager("M456", "Sales", 75000.00, "Sales Team A");
+        manager.displayManagerDetails();
+
+        // Modify salary for Manager
+        manager.modifySalary(80000.00);
+        System.out.println("Updated Manager Details:");
+        manager.displayManagerDetails();
+    }
+}
