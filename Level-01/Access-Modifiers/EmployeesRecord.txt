@@ -1,7 +1,13 @@
 // Base class: Employee
 class Employee {
+
+    //Static members
+    static String companyName = "TechCorp";
+    private static int totalEmployees = 0;
+
+
     // Public member
-    public String employeeID;
+    public final String employeeID;
 
     // Protected member
     protected String department;
@@ -14,7 +20,16 @@ class Employee {
         this.employeeID = employeeID;
         this.department = department;
         this.salary = salary;
+        totalEmployees++;
     }
+
+
+     public static void displayTotalEmployees() {
+        System.out.println("Total Employees: " + totalEmployees);
+    }
+
+
+
 
     // Public method to modify salary
     public void modifySalary(double newSalary) {
@@ -28,10 +43,16 @@ class Employee {
 
     // Public method to display employee details
     public void displayEmployeeDetails() {
-        System.out.println("Employee ID: " + employeeID);
-        System.out.println("Department: " + department);
-        System.out.println("Salary: $" + salary);
-        System.out.println();
+       
+    if (this instanceof Employee) { // Using instanceof to validate object type
+            System.out.println("Employee ID: " + employeeID);
+            System.out.println("Department: " + department);
+            System.out.println("Salary: $" + salary);
+            System.out.println();
+        } else {
+            System.out.println("Invalid employee object!");
+        }
+
     }
 }
 
