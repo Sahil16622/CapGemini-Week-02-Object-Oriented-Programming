@@ -1,7 +1,11 @@
 // Base class: BankAccount
 class BankAccount {
-    // Public member
-    public String accountNumber;
+    // Static member
+    static String bankName = "Global Bank";
+    private static int totalAccounts = 0;
+
+    // Public and final member
+    public final String accountNumber;
 
     // Protected member
     protected String accountHolder;
@@ -11,9 +15,15 @@ class BankAccount {
 
     // Constructor
     public BankAccount(String accountNumber, String accountHolder, double balance) {
-        this.accountNumber = accountNumber;
+        this.accountNumber = accountNumber; // Using 'this' to resolve ambiguity
         this.accountHolder = accountHolder;
         this.balance = balance;
+        totalAccounts++; // Increment the total number of accounts
+    }
+
+    // Static method to get total accounts
+    public static void getTotalAccounts() {
+        System.out.println("Total Accounts: " + totalAccounts);
     }
 
     // Public getter for balance
@@ -43,10 +53,15 @@ class BankAccount {
 
     // Public method to display account details
     public void displayAccountDetails() {
-        System.out.println("Account Number: " + accountNumber);
-        System.out.println("Account Holder: " + accountHolder);
-        System.out.println("Balance: $" + balance);
-        System.out.println();
+        if (this instanceof BankAccount) { // Using instanceof to check object type
+            System.out.println("Bank: " + bankName);
+            System.out.println("Account Number: " + accountNumber);
+            System.out.println("Account Holder: " + accountHolder);
+            System.out.println("Balance: $" + balance);
+            System.out.println();
+        } else {
+            System.out.println("Invalid account type!");
+        }
     }
 }
 
@@ -63,7 +78,8 @@ class SavingsAccount extends BankAccount {
     // Method to display SavingsAccount details
     public void displaySavingsAccountDetails() {
         System.out.println("Savings Account Details:");
-        System.out.println("Account Number: " + accountNumber); // Public member
+        System.out.println("Bank: " + bankName); // Static member
+        System.out.println("Account Number: " + accountNumber); // Public and final member
         System.out.println("Account Holder: " + accountHolder); // Protected member
         System.out.println("Interest Rate: " + interestRate + "%");
         System.out.println("Balance: $" + getBalance()); // Private member accessed via getter
@@ -85,6 +101,9 @@ public class BankAccountManagement {
         System.out.println("\nUpdated Bank Account Details:");
         account.displayAccountDetails();
 
+        // Display total accounts
+        BankAccount.getTotalAccounts();
+
         // Create a SavingsAccount object
         SavingsAccount savings = new SavingsAccount("9876543210", "Bob", 2000.00, 3.5);
         savings.displaySavingsAccountDetails();
@@ -94,5 +113,8 @@ public class BankAccountManagement {
         savings.withdraw(500.00);
         System.out.println("\nUpdated Savings Account Details:");
         savings.displaySavingsAccountDetails();
+
+        // Display total accounts
+        BankAccount.getTotalAccounts();
     }
 }
