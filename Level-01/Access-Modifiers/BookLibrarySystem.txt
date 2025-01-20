@@ -1,10 +1,10 @@
 // Base class: Book
 class Book {
     // Public member
-    public String ISBN;
+    static String libraryName = "Central Library";
 
     // Protected member
-    protected String title;
+    public final String ISBN;
 
     // Private member
     private String author;
@@ -28,10 +28,14 @@ class Book {
 
     // Public method to display book details
     public void displayBookDetails() {
-        System.out.println("ISBN: " + ISBN);
-        System.out.println("Title: " + title);
-        System.out.println("Author: " + author);
-        System.out.println();
+         if (this instanceof Book) { // Using instanceof to validate object type
+            System.out.println("ISBN: " + ISBN);
+            System.out.println("Title: " + title);
+            System.out.println("Author: " + author);
+            System.out.println();
+        } else {
+            System.out.println("Invalid book type!");
+        }       
     }
 }
 
