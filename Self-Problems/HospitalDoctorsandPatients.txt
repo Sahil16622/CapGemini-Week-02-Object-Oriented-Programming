@@ -1,0 +1,182 @@
+import java.util.ArrayList;
+
+// Patient class
+class Patient {
+    private String name;
+    private ArrayList<Doctor> consultedDoctors;
+
+    // Constructor
+    public Patient(String name) {
+        this.name = name;
+        this.consultedDoctors = new ArrayList<>();
+    }
+
+    // Add a doctor to the list of consulted doctors
+    public void addDoctor(Doctor doctor) {
+        if (!consultedDoctors.contains(doctor)) {
+            consultedDoctors.add(doctor);
+            doctor.addPatient(this); // Ensure mutual association
+        }
+    }
+
+    // Display the doctors consulted by the patient
+    public void displayDoctors() {
+        System.out.println("Patient: " + name);
+        if (consultedDoctors.isEmpty()) {
+            System.out.println("No doctors consulted yet.");
+        } else {
+            System.out.println("Doctors consulted:");
+            for (Doctor doctor : consultedDoctors) {
+                System.out.println("- Dr. " + doctor.getName() + " (" + doctor.getSpecialization() + ")");
+            }
+        }
+    }
+
+    // Get the patient's name
+    public String getName() {
+        return name;
+    }
+}
+
+// Doctor class
+class Doctor {
+    private String name;
+    private String specialization;
+    private ArrayList<Patient> patients;
+
+    // Constructor
+    public Doctor(String name, String specialization) {
+        this.name = name;
+        this.specialization = specialization;
+        this.patients = new ArrayList<>();
+    }
+
+    // Add a patient to the doctor's list
+    public void addPatient(Patient patient) {
+        if (!patients.contains(patient)) {
+            patients.add(patient);
+            patient.addDoctor(this); // Ensure mutual association
+        }
+    }
+
+    // Perform a consultation with a patient
+    public void consult(Patient patient) {
+        System.out.println("Dr. " + name + " (" + specialization + ") is consulting with patient " + patient.getName() + ".");
+        addPatient(patient); // Add patient to the doctor's list during consultation
+    }
+
+    // Display the patients consulted by the doctor
+    public void displayPatients() {
+        System.out.println("Dr. " + name + " (" + specialization + ")");
+        if (patients.isEmpty()) {
+            System.out.println("No patients consulted yet.");
+        } else {
+            System.out.println("Patients consulted:");
+            for (Patient patient : patients) {
+                System.out.println("- " + patient.getName());
+            }
+        }
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+}
+
+// Hospital class
+class Hospital {
+    private String name;
+    private ArrayList<Doctor> doctors;
+    private ArrayList<Patient> patients;
+
+    // Constructor
+    public Hospital(String name) {
+        this.name = name;
+        this.doctors = new ArrayList<>();
+        this.patients = new ArrayList<>();
+    }
+
+    // Add a doctor to the hospital
+    public void addDoctor(Doctor doctor) {
+        doctors.add(doctor);
+        System.out.println("Dr. " + doctor.getName() + " (" + doctor.getSpecialization() + ") joined " + name + ".");
+    }
+
+    // Add a patient to the hospital
+    public void addPatient(Patient patient) {
+        patients.add(patient);
+        System.out.println(patient.getName() + " registered at " + name + ".");
+    }
+
+    // Display all doctors in the hospital
+    public void displayDoctors() {
+        System.out.println("Doctors in " + name + ":");
+        for (Doctor doctor : doctors) {
+            System.out.println("- Dr. " + doctor.getName() + " (" + doctor.getSpecialization() + ")");
+        }
+    }
+
+    // Display all patients in the hospital
+    public void displayPatients() {
+        System.out.println("Patients in " + name + ":");
+        for (Patient patient : patients) {
+            System.out.println("- " + patient.getName());
+        }
+    }
+}
+
+// Main class to demonstrate the hospital system
+public class HospitalManagement {
+    public static void main(String[] args) {
+        // Create a hospital
+        Hospital hospital = new Hospital("City Hospital");
+
+        // Create doctors
+        Doctor doctor1 = new Doctor("Alice", "Cardiology");
+        Doctor doctor2 = new Doctor("Bob", "Neurology");
+
+        // Create patients
+        Patient patient1 = new Patient("John");
+        Patient patient2 = new Patient("Emily");
+        Patient patient3 = new Patient("Michael");
+
+        // Add doctors to the hospital
+        hospital.addDoctor(doctor1);
+        hospital.addDoctor(doctor2);
+
+        // Add patients to the hospital
+        hospital.addPatient(patient1);
+        hospital.addPatient(patient2);
+        hospital.addPatient(patient3);
+
+        // Perform consultations
+        doctor1.consult(patient1);
+        doctor1.consult(patient2);
+        doctor2.consult(patient2);
+        doctor2.consult(patient3);
+
+        // Display all doctors in the hospital
+        System.out.println("\nDoctors in the hospital:");
+        hospital.displayDoctors();
+
+        // Display all patients in the hospital
+        System.out.println("\nPatients in the hospital:");
+        hospital.displayPatients();
+
+        // Display patients consulted by each doctor
+        System.out.println("\nPatients consulted by doctors:");
+        doctor1.displayPatients();
+        doctor2.displayPatients();
+
+        // Display doctors consulted by each patient
+        System.out.println("\nDoctors consulted by patients:");
+        patient1.displayDoctors();
+        patient2.displayDoctors();
+        patient3.displayDoctors();
+    }
+}
