@@ -1,0 +1,124 @@
+import java.util.ArrayList;
+
+// Employee class
+class Employee {
+    private String name;
+    private int id;
+
+    // Constructor
+    public Employee(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    // toString method for displaying employee information
+    @Override
+    public String toString() {
+        return "Employee ID: " + id + ", Name: " + name;
+    }
+}
+
+// Department class
+class Department {
+    private String name;
+    private ArrayList<Employee> employees;
+
+    // Constructor
+    public Department(String name) {
+        this.name = name;
+        this.employees = new ArrayList<>();
+    }
+
+    // Add an employee to the department
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    // Display all employees in the department
+    public void displayEmployees() {
+        System.out.println("Department: " + name);
+        if (employees.isEmpty()) {
+            System.out.println("No employees in this department.");
+        } else {
+            for (Employee employee : employees) {
+                System.out.println(employee);
+            }
+        }
+    }
+
+    // Clean up resources when department is deleted
+    public void clearEmployees() {
+        employees.clear();
+        System.out.println("All employees in " + name + " have been removed.");
+    }
+}
+
+// Company class
+class Company {
+    private String name;
+    private ArrayList<Department> departments;
+
+    // Constructor
+    public Company(String name) {
+        this.name = name;
+        this.departments = new ArrayList<>();
+    }
+
+    // Add a department to the company
+    public void addDepartment(Department department) {
+        departments.add(department);
+    }
+
+    // Display all departments and their employees
+    public void displayDepartments() {
+        System.out.println("Company: " + name);
+        if (departments.isEmpty()) {
+            System.out.println("No departments in the company.");
+        } else {
+            for (Department department : departments) {
+                department.displayEmployees();
+                System.out.println();
+            }
+        }
+    }
+
+    // Clean up resources when the company is deleted
+    public void closeCompany() {
+        System.out.println("Closing company: " + name);
+        for (Department department : departments) {
+            department.clearEmployees();
+        }
+        departments.clear();
+        System.out.println("All departments and employees have been removed.");
+    }
+}
+
+// Main class to demonstrate composition
+public class CompanyManagement {
+    public static void main(String[] args) {
+        // Create a company
+        Company company = new Company("TechCorp");
+
+        // Create departments
+        Department hr = new Department("Human Resources");
+        Department it = new Department("IT Department");
+
+        // Add employees to departments
+        hr.addEmployee(new Employee("Alice", 101));
+        hr.addEmployee(new Employee("Bob", 102));
+
+        it.addEmployee(new Employee("Charlie", 201));
+        it.addEmployee(new Employee("Diana", 202));
+
+        // Add departments to the company
+        company.addDepartment(hr);
+        company.addDepartment(it);
+
+        // Display company, departments, and employees
+        company.displayDepartments();
+
+        // Delete the company (and all departments and employees)
+        System.out.println("\nDeleting the company...");
+        company.closeCompany();
+    }
+}
