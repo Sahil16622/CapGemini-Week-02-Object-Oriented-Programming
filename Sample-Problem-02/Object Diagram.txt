@@ -1,0 +1,17 @@
++------------------------+
+| Customer: Alice        |
++------------------------+
+| name = "Alice"         |
+| products = [Apples,    |
+| Milk]                  |
++------------------------+
+        /               \
+       /                 \
++-----------------+   +-----------------+
+| Product: Apples |   | Product: Milk   |
++-----------------+   +-----------------+
+| name = "Apples" |   | name = "Milk"   |
+| quantity = 2 kg |   | quantity = 1 ltr|
+| pricePerUnit = $3|   | pricePerUnit = $2|
++-----------------+   +-----------------+
+
