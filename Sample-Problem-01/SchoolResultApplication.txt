@@ -1,0 +1,136 @@
+// Class representing a Subject
+class Subject {
+    private String subjectName;
+    private double score;
+
+    // Constructor to initialize subject details
+    public Subject(String subjectName, double score) {
+        this.subjectName = subjectName;
+        this.score = score;
+    }
+
+    // Getter and Setter methods
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+}
+
+// Class representing a Student
+class Student {
+    private String name;
+    private int rollNumber;
+    private Subject[] subjects;
+
+    // Constructor to initialize student details
+    public Student(String name, int rollNumber, int numberOfSubjects) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+        this.subjects = new Subject[numberOfSubjects];
+    }
+
+    // Getter and Setter methods
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRollNumber() {
+        return rollNumber;
+    }
+
+    public void setRollNumber(int rollNumber) {
+        this.rollNumber = rollNumber;
+    }
+
+    public Subject[] getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Subject[] subjects) {
+        this.subjects = subjects;
+    }
+
+    // Method to add a subject to the student's subjects array
+    public void addSubject(int index, Subject subject) {
+        if (index < subjects.length) {
+            subjects[index] = subject;
+        }
+    }
+}
+
+// Class for calculating the Grade
+class GradeCalculator {
+
+    // Method to calculate grade based on total score
+    public String calculateGrade(Student student) {
+        double totalScore = 0;
+        int numberOfSubjects = student.getSubjects().length;
+
+        // Sum up scores of all subjects
+        for (Subject subject : student.getSubjects()) {
+            if (subject != null) {
+                totalScore += subject.getScore();
+            }
+        }
+
+        // Calculate average score
+        double averageScore = totalScore / numberOfSubjects;
+
+        // Determine grade based on average score
+        if (averageScore >= 90) {
+            return "A";
+        } else if (averageScore >= 75) {
+            return "B";
+        } else if (averageScore >= 50) {
+            return "C";
+        } else {
+            return "F";
+        }
+    }
+}
+
+// Main class to test the program
+public class SchoolResultsApp {
+    public static void main(String[] args) {
+        // Create subjects
+        Subject math = new Subject("Mathematics", 85);
+        Subject science = new Subject("Science", 78);
+        Subject english = new Subject("English", 92);
+
+        // Create a student with space for 3 subjects
+        Student student = new Student("John Doe", 101, 3);
+        student.addSubject(0, math);
+        student.addSubject(1, science);
+        student.addSubject(2, english);
+
+        // Create a grade calculator and calculate grade
+        GradeCalculator gradeCalculator = new GradeCalculator();
+        String grade = gradeCalculator.calculateGrade(student);
+
+        // Print student details and grade
+        System.out.println("Student Name: " + student.getName());
+        System.out.println("Roll Number: " + student.getRollNumber());
+        System.out.println("Subjects and Scores:");
+        for (Subject subject : student.getSubjects()) {
+            if (subject != null) {
+                System.out.println(subject.getSubjectName() + ": " + subject.getScore());
+            }
+        }
+        System.out.println("Grade: " + grade);
+    }
+}
