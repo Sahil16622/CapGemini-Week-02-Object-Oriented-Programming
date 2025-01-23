@@ -1,0 +1,146 @@
+import java.util.ArrayList;
+
+// Account class
+class Account {
+    private int accountNumber;
+    private double balance;
+
+    // Constructor
+    public Account(int accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+
+    // Getters
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    // Deposit money into the account
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount + " into Account #" + accountNumber);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    // Withdraw money from the account
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount + " from Account #" + accountNumber);
+        } else {
+            System.out.println("Invalid withdrawal amount.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Account #" + accountNumber + ", Balance: $" + balance;
+    }
+}
+
+// Customer class
+class Customer {
+    private String name;
+    private ArrayList<Account> accounts;
+
+    // Constructor
+    public Customer(String name) {
+        this.name = name;
+        this.accounts = new ArrayList<>();
+    }
+
+    // Open a new account
+    public void openAccount(Account account) {
+        accounts.add(account);
+        System.out.println(name + " opened " + account);
+    }
+
+    // View all accounts and balances
+    public void viewAccounts() {
+        System.out.println("Customer: " + name);
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts available.");
+        } else {
+            for (Account account : accounts) {
+                System.out.println(account);
+            }
+        }
+    }
+}
+
+// Bank class
+class Bank {
+    private String name;
+    private ArrayList<Customer> customers;
+
+    // Constructor
+    public Bank(String name) {
+        this.name = name;
+        this.customers = new ArrayList<>();
+    }
+
+    // Add a customer to the bank
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+        System.out.println("Customer " + customer + " added to " + name);
+    }
+
+    // Open an account for a customer
+    public void openAccount(Customer customer, Account account) {
+        if (customers.contains(customer)) {
+            customer.openAccount(account);
+            System.out.println("Account " + account.getAccountNumber() + " opened for " + customer + " at " + name);
+        } else {
+            System.out.println("Customer not found in " + name);
+        }
+    }
+
+    // Display all customers
+    public void displayCustomers() {
+        System.out.println("Bank: " + name);
+        if (customers.isEmpty()) {
+            System.out.println("No customers in the bank.");
+        } else {
+            for (Customer customer : customers) {
+                System.out.println("Customer: " + customer);
+            }
+        }
+    }
+}
+
+// Main class to demonstrate association
+public class BankManagement {
+    public static void main(String[] args) {
+        // Create a bank
+        Bank bank = new Bank("National Bank");
+
+        // Create customers
+        Customer customer1 = new Customer("Alice");
+        Customer customer2 = new Customer("Bob");
+
+        // Add customers to the bank
+        bank.addCustomer(customer1);
+        bank.addCustomer(customer2);
+
+        // Open accounts for customers
+        Account account1 = new Account(1001, 500.0);
+        Account account2 = new Account(1002, 1000.0);
+        Account account3 = new Account(1003, 750.0);
+
+        customer1.openAccount(account1);
+        customer1.openAccount(account2);
+        customer2.openAccount(account3);
+
+        // View accounts and balances
+        customer1.viewAccounts();
+        customer2.viewAccounts();
+    }
+}
