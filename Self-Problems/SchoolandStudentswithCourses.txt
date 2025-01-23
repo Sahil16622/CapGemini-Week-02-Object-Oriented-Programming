@@ -1,0 +1,153 @@
+import java.util.ArrayList;
+
+// Course class
+class Course {
+    private String name;
+    private ArrayList<Student> enrolledStudents;
+
+    // Constructor
+    public Course(String name) {
+        this.name = name;
+        this.enrolledStudents = new ArrayList<>();
+    }
+
+    // Enroll a student in the course
+    public void enrollStudent(Student student) {
+        if (!enrolledStudents.contains(student)) {
+            enrolledStudents.add(student);
+            student.addCourse(this);
+            System.out.println(student.getName() + " enrolled in " + name);
+        }
+    }
+
+    // Display students enrolled in the course
+    public void displayStudents() {
+        System.out.println("Course: " + name);
+        if (enrolledStudents.isEmpty()) {
+            System.out.println("No students enrolled in this course.");
+        } else {
+            for (Student student : enrolledStudents) {
+                System.out.println("Student: " + student.getName());
+            }
+        }
+    }
+
+    // Get the course name
+    public String getName() {
+        return name;
+    }
+}
+
+// Student class
+class Student {
+    private String name;
+    private ArrayList<Course> enrolledCourses;
+
+    // Constructor
+    public Student(String name) {
+        this.name = name;
+        this.enrolledCourses = new ArrayList<>();
+    }
+
+    // Add a course to the student's enrolled courses
+    public void addCourse(Course course) {
+        if (!enrolledCourses.contains(course)) {
+            enrolledCourses.add(course);
+        }
+    }
+
+    // View the courses the student is enrolled in
+    public void viewCourses() {
+        System.out.println("Student: " + name);
+        if (enrolledCourses.isEmpty()) {
+            System.out.println("No courses enrolled.");
+        } else {
+            for (Course course : enrolledCourses) {
+                System.out.println("Course: " + course.getName());
+            }
+        }
+    }
+
+    // Get the student's name
+    public String getName() {
+        return name;
+    }
+}
+
+// School class
+class School {
+    private String name;
+    private ArrayList<Student> students;
+
+    // Constructor
+    public School(String name) {
+        this.name = name;
+        this.students = new ArrayList<>();
+    }
+
+    // Add a student to the school
+    public void addStudent(Student student) {
+        students.add(student);
+        System.out.println(student.getName() + " added to " + name);
+    }
+
+    // Display all students in the school
+    public void displayStudents() {
+        System.out.println("School: " + name);
+        if (students.isEmpty()) {
+            System.out.println("No students in the school.");
+        } else {
+            for (Student student : students) {
+                System.out.println("Student: " + student.getName());
+            }
+        }
+    }
+}
+
+// Main class to demonstrate association and aggregation
+public class SchoolManagement {
+    public static void main(String[] args) {
+        // Create a school
+        School school = new School("Greenfield High");
+
+        // Create students
+        Student student1 = new Student("Alice");
+        Student student2 = new Student("Bob");
+        Student student3 = new Student("Charlie");
+
+        // Add students to the school
+        school.addStudent(student1);
+        school.addStudent(student2);
+        school.addStudent(student3);
+
+        // Create courses
+        Course math = new Course("Mathematics");
+        Course science = new Course("Science");
+        Course history = new Course("History");
+
+        // Enroll students in courses
+        math.enrollStudent(student1);
+        math.enrollStudent(student2);
+
+        science.enrollStudent(student1);
+        science.enrollStudent(student3);
+
+        history.enrollStudent(student2);
+
+        // Display students in the school
+        System.out.println("\nAll students in the school:");
+        school.displayStudents();
+
+        // Display courses for each student
+        System.out.println("\nCourses for each student:");
+        student1.viewCourses();
+        student2.viewCourses();
+        student3.viewCourses();
+
+        // Display students enrolled in each course
+        System.out.println("\nStudents in each course:");
+        math.displayStudents();
+        science.displayStudents();
+        history.displayStudents();
+    }
+}
