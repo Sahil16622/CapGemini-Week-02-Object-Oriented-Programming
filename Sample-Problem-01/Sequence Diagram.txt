@@ -1,0 +1,14 @@
+Student                     GradeCalculator                   Subject
+    |                              |                            |
+    |--- requestGrade() ---------> |                            |
+    |                              |                            |
+    |     getSubjects() ---------->|                            |
+    |                              |---- getMarks(Maths) ------>|
+    |                              |<--- return Marks (90) -----|
+    |                              |---- getMarks(Science) ---->|
+    |                              |<--- return Marks (85) -----|
+    |                              |                            |
+    | <--- calculateGrade() -------|                            |
+    | Display Grade                |                            |
+    |                              |                            |
+
