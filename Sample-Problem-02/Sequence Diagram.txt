@@ -1,0 +1,13 @@
+Customer                      BillGenerator                     Product
+    |                               |                              |
+    |--- requestBill() ------------>|                              |
+    |                               |                              |
+    |    getProducts() ------------>|                              |
+    |                               |---- getTotalPrice(Apples) -->|
+    |                               |<---- return Price ($6) ------|
+    |                               |---- getTotalPrice(Milk) ---->|
+    |                               |<---- return Price ($2) ------|
+    |                               |                              |
+    | <--- generateBill() ----------|                              |
+    | Display Total: $8             |                              |
+    |                               |                              |
